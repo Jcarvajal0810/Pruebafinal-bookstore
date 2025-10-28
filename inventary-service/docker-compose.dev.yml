@@ -1,0 +1,9 @@
+﻿  inventory:
+    build: ./inventary-service
+    container_name: bs2_inventory
+    ports:
+      - '6000:6000'
+    environment:
+      - MONGO_URI=mongodb://bs2_mongo:27017/bookstore_inventory
+    depends_on:
+      - mongo
