@@ -6,9 +6,13 @@ const router = express.Router();
 // In Docker the service name is `order` so default to that.
 const ORDER_URL = process.env.ORDER_SERVICE_URL || "http://order:4000";
 
+// The order service expects requests to /api/orders/*
 router.use('/', createProxyMiddleware({
     target: ORDER_URL,
-    changeOrigin: true
+    changeOrigin: true,
+    pathRewrite: {
+        '^/order': '/api/orders'  // /order -> /api/orders
+    }
 }));
 
 module.exports = router;
