@@ -2,7 +2,9 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 
-const CATALOG_URL = "http://localhost:3000";
+// Allow overriding the catalog URL via env var for local development.
+// In Docker the service name is `catalog` so default to that.
+const CATALOG_URL = process.env.CATALOG_URL || "http://catalog:3000";
 
 // Obtener todos los libros
 router.get('/', async (req, res) => {
